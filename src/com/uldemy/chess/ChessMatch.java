@@ -1,6 +1,8 @@
 package com.uldemy.chess;
 
 import com.uldemy.boardgame.Board;
+import com.uldemy.boardgame.Piece;
+import com.uldemy.boardgame.Position;
 import com.uldemy.chess.pieces.King;
 import com.uldemy.chess.pieces.Rook;
 
@@ -23,6 +25,31 @@ public class ChessMatch {
             }
         }
         return mat;
+    }
+
+    //realiza o movimento da peça;
+    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition){
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source);
+        Piece capturedPiece = makeMove(source, target);
+        return (ChessPiece) capturedPiece;
+    }
+
+    //remove a peça do local atual, coloca ela no local desejado e retorna a peça inimiga do local alvo, removendo ela
+    // da posição;
+    private Piece makeMove(Position source, Position target){
+        Piece p = board.removePiece(source);
+        Piece capturedPiece = board.removePiece(target);
+        board.placePiece(p, target);
+        return capturedPiece;
+    }
+
+    //verifica se existe uma peça no local desejado, para poder mover;
+    private void validateSourcePosition(Position position){
+        if (!board.thereIsAPiece(position)){
+            throw new ChessExeption("There is no piece on source position");
+        }
     }
 
     //coloca uma peça na posição válida desejada, passando a peça e a posição

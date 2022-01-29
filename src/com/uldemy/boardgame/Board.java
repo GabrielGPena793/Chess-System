@@ -48,6 +48,21 @@ public class Board {
         piece.position = position;
     }
 
+    //remove a peça da posição e retorna a peça, colocando a posição que ela tava como null;
+    public Piece removePiece(Position position){
+        if (!positionExists(position)){
+            throw new BoardExeption("Position not on the board.");
+        }
+        //verifica se a peça é nula
+        if (piece(position) == null){
+            return null;
+        }
+        Piece aux = piece(position);
+        aux.position = null;
+        pieces[position.getRow()][position.getColumn()] =  null;
+        return aux;
+    }
+
     //faz a verificação das posições da matriz;
     private boolean positionExists(int row, int colmn){
         return (row >= 0 && row < rows) && (colmn >= 0 && colmn < colmns);
