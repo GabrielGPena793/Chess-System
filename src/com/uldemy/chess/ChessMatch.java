@@ -45,10 +45,13 @@ public class ChessMatch {
         return capturedPiece;
     }
 
-    //verifica se existe uma peça no local desejado, para poder mover;
+    //verifica se existe uma peça no local desejado e se a peça pode ir para aquela posição;
     private void validateSourcePosition(Position position){
         if (!board.thereIsAPiece(position)){
             throw new ChessExeption("There is no piece on source position");
+        }
+        if (!board.piece(position).isThereAnyPossibleMove()){
+            throw new ChessExeption("There is no possible moves for the chosen piece");
         }
     }
 
