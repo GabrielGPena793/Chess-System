@@ -1,7 +1,6 @@
 package com.uldemy.chess;
 
 import com.uldemy.boardgame.Board;
-import com.uldemy.boardgame.Position;
 import com.uldemy.chess.pieces.King;
 import com.uldemy.chess.pieces.Rook;
 
@@ -14,6 +13,8 @@ public class ChessMatch {
         initialSetup();
     }
 
+    //cria uma matriz com o tamanho do tabuleiro, colocando uma peça em cada posição do tabuleiro caso haja uma peça
+    // na matriz de peças na mesma posição do tabuleiro;
     public ChessPiece[][] getPieces(){
         ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColmns()];
         for (int i = 0; i < board.getRows();i++){
@@ -24,6 +25,7 @@ public class ChessMatch {
         return mat;
     }
 
+    //coloca uma peça na posição válida desejada, passando a peça e a posição
     private void placeNewPiece(char column, int row, ChessPiece piece){
         board.placePiece(piece, new ChessPosition(column,row).toPosition());
     }

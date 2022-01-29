@@ -23,6 +23,7 @@ public class Board {
         return colmns;
     }
 
+    //verifica se existe a posição e me retorna a posição da matriz caso exista;
     public Piece piece(int row, int colmn){
         if (!positionExists(row, colmn)){
             throw  new BoardExeption("Position not on the board.");
@@ -30,13 +31,15 @@ public class Board {
         return pieces[row][colmn];
     }
 
+    //verifica se existe a posição e me retorna a posição da matriz caso exista; @sobrecarga
     public Piece piece(Position position){
         if (!positionExists(position)){
-            throw  new BoardExeption("Position not on the board.");
+            throw new BoardExeption("Position not on the board.");
         }
         return pieces[position.getRow()][position.getColumn()];
     }
 
+    //faz a verificação se existe algo na posição da matriz, se não exisir, coloca uma peça na posição;
     public void placePiece(Piece piece, Position position){
         if (thereIsAPiece(position)){
             throw new BoardExeption("There is already a piece on position " + position);
@@ -45,14 +48,17 @@ public class Board {
         piece.position = position;
     }
 
+    //faz a verificação das posições da matriz;
     private boolean positionExists(int row, int colmn){
         return (row >= 0 && row < rows) && (colmn >= 0 && colmn < colmns);
     }
 
+    //faz a verificação das posições da matriz pela posição; @sobrecarga;
     public boolean positionExists(Position position){
         return positionExists(position.getRow(), position.getColumn());
     }
 
+    //primeiro faz a verificação se existe a posição na matriz e depois verifica se existe alguma peça na posição.
     public boolean thereIsAPiece(Position position){
         if (!positionExists(position)){
             throw  new BoardExeption("Position not on the board.");
