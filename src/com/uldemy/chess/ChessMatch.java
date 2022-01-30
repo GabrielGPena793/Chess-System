@@ -27,7 +27,7 @@ public class ChessMatch {
         return mat;
     }
 
-    //mostra os posiveis movimentos da peça que irá se mover;
+    //marca os posiveis movimentos da peça que irá se mover;
     public boolean[][] possibleMoves(ChessPosition sourcePosition){
         Position position = sourcePosition.toPosition();
         validateSourcePosition(position);
