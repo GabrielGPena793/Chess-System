@@ -1,5 +1,6 @@
 package com.uldemy.application;
 
+import com.uldemy.chess.ChessMatch;
 import com.uldemy.chess.ChessPiece;
 
 import com.uldemy.chess.ChessPosition;
@@ -50,6 +51,14 @@ public class UI {
         catch (RuntimeException e){
             throw new InputMismatchException("Erro reading ChessPosition. Valid values are from a1 to h8");
         }
+    }
+
+
+    public static void printMatch(ChessMatch chessMatch){
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
     }
 
     //printa na tela o jogo de xadrez.

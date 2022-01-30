@@ -8,11 +8,23 @@ import com.uldemy.chess.pieces.Rook;
 
 public class ChessMatch {
 
+    private int turn;
+    private Color currentPlayer;
     private Board board;
 
     public ChessMatch() {
         board = new Board(8,8);
+        turn = 1;
+        currentPlayer = Color.WHITE;
         initialSetup();
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public Color getCurrentPlayer(){
+        return currentPlayer;
     }
 
     //cria uma matriz com o tamanho do tabuleiro, colocando uma peça em cada posição do tabuleiro caso haja uma peça
@@ -41,6 +53,7 @@ public class ChessMatch {
         validateSourcePosition(source);
         validadeTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
+        nextTurn();
         return (ChessPiece) capturedPiece;
     }
 
@@ -53,11 +66,17 @@ public class ChessMatch {
         return capturedPiece;
     }
 
-    //verifica se existe uma peça no local desejado e se a peça pode ir para aquela posição;
+    //validações do jogo;
     private void validateSourcePosition(Position position){
+        //verifica se tem uma peça na posição selecionada;
         if (!board.thereIsAPiece(position)){
             throw new ChessExeption("There is no piece on source position");
         }
+        //verifica se a peça é a do jogador da vez;
+        if (currentPlayer != ((ChessPiece) board.piece(position)).getColor()){
+            throw new ChessExeption("The chosen piece is not yours");
+        }
+        //verifica se a peça pode se mover para algum lugar
         if (!board.piece(position).isThereAnyPossibleMove()){
             throw new ChessExeption("There is no possible moves for the chosen piece");
         }
@@ -68,6 +87,11 @@ public class ChessMatch {
         if (!board.piece(source).possibleMove(target)){
             throw new ChessExeption("The chosen piece can't move to target position");
         }
+    }
+
+    private void nextTurn(){
+        turn++;
+        this.currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK :  Color.BLACK;
     }
 
     //coloca uma peça na posição válida desejada, passando a peça e a posição
