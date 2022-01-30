@@ -2,6 +2,7 @@ package com.uldemy.chess;
 
 import com.uldemy.boardgame.Board;
 import com.uldemy.boardgame.Piece;
+import com.uldemy.boardgame.Position;
 
 public abstract class ChessPiece extends Piece {
 
@@ -14,5 +15,11 @@ public abstract class ChessPiece extends Piece {
 
     public Color getColor() {
         return color;
+    }
+
+    //verifica se existe uma peça inimiga ou aliada na posição alvo;
+    protected boolean isThereOpponentPiece(Position position){
+        ChessPiece p = (ChessPiece) getBoard().piece(position);
+        return  p != null && p.getColor() != color;
     }
 }
