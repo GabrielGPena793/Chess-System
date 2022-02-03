@@ -23,7 +23,7 @@ public class Board {
         return colmns;
     }
 
-    //verifica se existe a posição e me retorna a posição da matriz caso exista;
+    //verifica se existe a posição e (retorna)-me a posição da matriz caso exista;
     public Piece piece(int row, int colmn){
         if (!positionExists(row, colmn)){
             throw  new BoardExeption("Position not on the board.");
@@ -31,7 +31,7 @@ public class Board {
         return pieces[row][colmn];
     }
 
-    //verifica se existe a posição e me retorna a posição da matriz caso exista; @sobrecarga
+    //verifica se existe a posição e (retorna)-me a posição da matriz caso exista; @sobrecarga
     public Piece piece(Position position){
         if (!positionExists(position)){
             throw new BoardExeption("Position not on the board.");
